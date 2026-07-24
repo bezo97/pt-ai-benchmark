@@ -11,9 +11,10 @@ Feel free to open a PR with your results!
 
 ## Results
 
-| Nr. | Model       | Quant | Harness            | Tokens    | Context utilization | Details                  | Output                     |
-| --- | ----------- | ----- | ------------------ | --------- | ------------------- | ------------------------ | -------------------------- |
-| 1   | Qwen3.6-27B | Q8    | pi (no extensions) | ↑15k ↓52k | 26.1%/256k          | [Details](#1-qwen36-27b) | [Output](/qwen3.6-27B-Q8/) |
+| Nr. | Model           | Quant      | Harness            | Tokens    | Context utilization | Details                  | Output                     |
+| --- | --------------- | ---------- | ------------------ | --------- | ------------------- | ------------------------ | -------------------------- |
+| 1   | Qwen3.6-27B     | UD-Q8_K_XL | pi (no extensions) | ↑15k ↓52k | 26.1%/256k          | [Details](#1-qwen36-27b) | [Output](/qwen3.6-27B-Q8/) |
+| 2   | Hy3 (295B-A21B) | IQ1_M      | pi (no extensions) | -         | 64k                 | [Details](#2-Hy3)        | [Output](/Hy3/)            |
 
 ## Details
 
@@ -31,3 +32,16 @@ chat-template-kwargs = {"preserve_thinking": true, "reasoning_preserve": true}
 ```
 
 Note: The agent created a by-product file named `nul`, I renamed it to `nul_` to be able to commit full output.
+
+### 2 Hy3
+
+```ini
+cache-type-k = q4_0
+cache-type-v = q4_0
+ctkd = q4_0
+ctvd = q4_0
+ctx-size = 64000
+chat-template-kwargs = {"reasoning_effort": "low"}
+```
+
+Note: Due to hardware limits I had to run this with Q1 quantization and also very limited context size, so there were multiple context compressions during the run.
