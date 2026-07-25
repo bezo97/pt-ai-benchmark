@@ -11,10 +11,11 @@ Feel free to open a PR with your results!
 
 ## Results
 
-| Nr. | Model           | Quant      | Harness            | Tokens    | Context utilization | Details                  | Output                     |
-| --- | --------------- | ---------- | ------------------ | --------- | ------------------- | ------------------------ | -------------------------- |
-| 1   | Qwen3.6-27B     | UD-Q8_K_XL | pi (no extensions) | ↑15k ↓52k | 26.1%/256k          | [Details](#1-qwen36-27b) | [Output](/qwen3.6-27B-Q8/) |
-| 2   | Hy3 (295B-A21B) | IQ1_M      | pi (no extensions) | -         | 64k                 | [Details](#2-Hy3)        | [Output](/Hy3/)            |
+| Nr. | Model           | Quant      | Harness            | Tokens    | Context utilization | Details                     | Output                     |
+| --- | --------------- | ---------- | ------------------ | --------- | ------------------- | --------------------------- | -------------------------- |
+| 1   | Qwen3.6-27B     | UD-Q8_K_XL | pi (no extensions) | ↑15k ↓52k | 26.1%/256k          | [Details](#1-qwen36-27b)    | [Output](/qwen3.6-27B-Q8/) |
+| 2   | Hy3 (295B-A21B) | IQ1_M      | pi (no extensions) | -         | 64k                 | [Details](#2-Hy3)           | [Output](/Hy3/)            |
+| 3   | Claude Opus 5   | -          | Claude Code CLI    | -         | -                   | [Details](#3-Claude-Opus-5) | [Output](/Claude-Opus-5/)  |
 
 ## Details
 
@@ -45,3 +46,17 @@ chat-template-kwargs = {"reasoning_effort": "low"}
 ```
 
 Note: Due to hardware limits I had to run this with Q1 quantization and also very limited context size, so there were multiple context compressions during the run.
+
+### 3 Claude Opus 5
+
+```
+Total cost: $0.69
+Total duration (API): 2m 57s
+Total duration (wall): 6m 8s
+Total code changes: 323 lines added, 0 lines removed
+
+claude-haiku-4-5: 601 input, 21 output, 0 cache read, 0 cache write ($0.0007)
+claude-opus-5: 19 input, 13.5k output, 275.1k cache read, 21.1k cache write ($0.69)
+```
+
+Note: result was correctly produced in PPM format, only the submission was provided in png. Thanks to rychveldir for the run.
