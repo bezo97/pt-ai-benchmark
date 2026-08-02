@@ -11,11 +11,21 @@ Feel free to open a PR with your results!
 
 ## Results
 
-| Nr. | Model           | Quant      | Harness            | Tokens    | Context utilization | Details                     | Output                     |
-| --- | --------------- | ---------- | ------------------ | --------- | ------------------- | --------------------------- | -------------------------- |
-| 1   | Qwen3.6-27B     | UD-Q8_K_XL | pi (no extensions) | ↑15k ↓52k | 26.1%/256k          | [Details](#1-qwen36-27b)    | [Output](/qwen3.6-27B-Q8/) |
-| 2   | Hy3 (295B-A21B) | IQ1_M      | pi (no extensions) | -         | 64k                 | [Details](#2-Hy3)           | [Output](/Hy3/)            |
-| 3   | Claude Opus 5   | -          | Claude Code CLI    | -         | -                   | [Details](#3-Claude-Opus-5) | [Output](/Claude-Opus-5/)  |
+Please see outputs to evaluate quality.
+
+| Nr. | Model                 | Quant      | Harness            | Tokens     | Context utilization | Details                             | Code produced | Binaries built | Image produced | Scene correct | Output                            |
+| --- | --------------------- | ---------- | ------------------ | ---------- | ------------------- | ----------------------------------- | ------------- | -------------- | -------------- | ------------- | --------------------------------- |
+| 1   | Qwen3.6-27B           | UD-Q8_K_XL | pi (no extensions) | ↑15k ↓52k  | 26.1%/256k          | [Details](#1-qwen36-27b)            | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.6-27B-Q8/)        |
+| 2   | Hy3 (295B-A21B)       | IQ1_M      | pi (no extensions) | -          | 64k                 | [Details](#2-Hy3)                   | ✅            | ✅             | ✅             | ❌            | [Output](/Hy3/)                   |
+| 3   | Claude Opus 5         | -          | Claude Code CLI    | -          | -                   | [Details](#3-Claude-Opus-5)         | ✅            | ✅             | ✅             | ✅            | [Output](/Claude-Opus-5/)         |
+| 4   | Laguna S 2.1          | UD-Q4_K_XL | pi (no extensions) | ↑7.2k ↓18k | 9.7%/256k           | [Details](#4-Laguna-S-21)           | ✅            | ❌             | ✅             | ❌            | [Output](/Laguna-S-2.1/)          |
+| 5   | Deepseek 4 Flash 0731 | UD-IQ2_XXS | pi (no extensions) | ↑57k ↓56k  | 93.8%/64k           | [Details](#5-Deepseek-4-Flash-0731) | ✅            | ✅             | ✅             | ✅            | [Output](/Deepseek-4-Flash-0731/) |
+
+## Failed attempts
+
+Some models failed to complete the task (no files produced, blank image, diverting from task, etc.) - listed here separately:
+
+- Deepseek-4-Flash-preview - ran out of context during initial thinking, then loop.
 
 ## Details
 
@@ -60,3 +70,25 @@ claude-opus-5: 19 input, 13.5k output, 275.1k cache read, 21.1k cache write ($0.
 ```
 
 Note: result was correctly produced in PPM format, only the submission was provided in png. Thanks to rychveldir for the run.
+
+### 4 Laguna-S-2.1
+
+Note: Failed to compile the c++ code so it rewrote the code in python to produce the image, which is blank. Technically it did not completely fail because c++ code was produced and it creatively used available tools, but the overall solution is not desirable.
+
+### 5 Deepseek-4-Flash-0731
+
+```ini
+reasoning = on
+cache-type-k = q4_0
+cache-type-v = q4_0
+ctx-size = 64000
+temperature = 1.0
+top-p = 0.95
+chat-template-kwargs = {"reasoning_effort": "high"}
+```
+
+Notes:
+
+- Due to hardware limits I had to run this with heavily quantized weights and kv-cache, and also a small context size (but no context compression was needed)
+- The results were produced after `[↑38k ↓39k]` tokens, then the agent proceeded to verify the resulting image which turned into a sort of thinking loop.
+- The png file is a byproduct, not sure why the agent converted the ppm
