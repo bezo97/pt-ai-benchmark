@@ -21,6 +21,7 @@ Please see outputs to evaluate quality.
 | 4   | Laguna S 2.1          | UD-Q4_K_XL | pi (no extensions) | ↑7.2k ↓18k | 9.7%/256k           | [Details](#4-Laguna-S-21)           | ✅            | ❌             | ✅             | ❌            | [Output](/Laguna-S-2.1/)          |
 | 5   | Deepseek 4 Flash 0731 | UD-IQ2_XXS | pi (no extensions) | ↑57k ↓56k  | 93.8%/64k           | [Details](#5-Deepseek-4-Flash-0731) | ✅            | ✅             | ✅             | ✅            | [Output](/Deepseek-4-Flash-0731/) |
 | 6   | Qwen3.8-27B (high)    | UD-Q8_K_XL | pi (no extensions) | ↑62k ↓68k  | 31.7%/256k          | [Details](#6-qwen38-27b-high-pi)    | ✅            | ❌             | ❌             | ❌            | [Output](/qwen3.8-27B-Q8/)        |
+| 7   | Qwen3.8-27B (low)     | UD-Q8_K_XL | pi (no extensions) | ↑22k ↓18k  | 9.9%/256k           | [Details](#7-qwen38-27b-low-pi)     | ✅            | ❌             | ❌             | ❌            | [Output](/qwen3.8-27B-Q8-low/)    |
 
 ## Failed attempts
 
@@ -108,3 +109,18 @@ chat-template-kwargs = {"preserve_thinking": true, "reasoning_preserve": true}
 Effort: High (default)
 
 Note: Agent did not find the compiler on the machine, used python script to verify. The cpp code does not compile, missing 1 Vec operator.
+
+### 7 Qwen3.8-27B (low, pi)
+
+```ini
+temperature = 1.0
+top-p = 0.95
+top-k = 20
+min-p = 0.0
+presence-penalty = 0.0
+chat-template-kwargs = {"preserve_thinking": true, "reasoning_preserve": true, "reasoning_effort": "low"}
+```
+
+Effort: Low
+
+Note: Agent did not find the compiler on the machine. The cpp code does not compile, missing 1 Vec operator.
