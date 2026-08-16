@@ -20,8 +20,8 @@ Please see outputs to evaluate quality.
 | 3   | Claude Opus 5         | -          | Claude Code CLI    | -          | -                   | [Details](#3-Claude-Opus-5)         | ✅            | ✅             | ✅             | ✅            | [Output](/Claude-Opus-5/)         |
 | 4   | Laguna S 2.1          | UD-Q4_K_XL | pi (no extensions) | ↑7.2k ↓18k | 9.7%/256k           | [Details](#4-Laguna-S-21)           | ✅            | ❌             | ✅             | ❌            | [Output](/Laguna-S-2.1/)          |
 | 5   | Deepseek 4 Flash 0731 | UD-IQ2_XXS | pi (no extensions) | ↑57k ↓56k  | 93.8%/64k           | [Details](#5-Deepseek-4-Flash-0731) | ✅            | ✅             | ✅             | ✅            | [Output](/Deepseek-4-Flash-0731/) |
-| 6   | Qwen3.8-27B (high)    | UD-Q8_K_XL | pi (no extensions) | ↑62k ↓68k  | 31.7%/256k          | [Details](#6-qwen38-27b-high-pi)    | ✅            | ❌             | ❌             | ❌            | [Output](/qwen3.8-27B-Q8/)        |
-| 7   | Qwen3.8-27B (low)     | UD-Q8_K_XL | pi (no extensions) | ↑22k ↓18k  | 9.9%/256k           | [Details](#7-qwen38-27b-low-pi)     | ✅            | ❌             | ❌             | ❌            | [Output](/qwen3.8-27B-Q8-low/)    |
+| 6   | Qwen3.8-27B (high)    | UD-Q8_K_XL | pi (no extensions) | ↑75k ↓149k | 63.6%/256k          | [Details](#6-qwen38-27b-high-pi)    | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-27B-Q8/)        |
+| 7   | Qwen3.8-27B (low)     | UD-Q8_K_XL | pi (no extensions) | ↑17k ↓47k  | 25.2%/256k          | [Details](#7-qwen38-27b-low-pi)     | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-27B-Q8-low/)    |
 
 ## Failed attempts
 
@@ -106,9 +106,9 @@ presence-penalty = 0.0
 chat-template-kwargs = {"preserve_thinking": true, "reasoning_preserve": true}
 ```
 
-Effort: High (default)
+Pi harness effort: high
 
-Note: Agent did not find the compiler on the machine, used python script to verify. The cpp code does not compile, missing 1 Vec operator.
+Note: Agent created a temporary debugger cpp script and used ffmpeg on path to convert ppm to png for visual verification.
 
 ### 7 Qwen3.8-27B (low, pi)
 
@@ -121,6 +121,6 @@ presence-penalty = 0.0
 chat-template-kwargs = {"preserve_thinking": true, "reasoning_preserve": true, "reasoning_effort": "low"}
 ```
 
-Effort: Low
+Pi harness effort: low
 
-Note: Agent did not find the compiler on the machine. The cpp code does not compile, missing 1 Vec operator.
+Note: Agent created a temporary debugger cpp script and used ffmpeg on path to convert ppm to png for visual verification.
