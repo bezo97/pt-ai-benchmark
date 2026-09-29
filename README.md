@@ -25,7 +25,7 @@ Please see outputs to evaluate quality.
 | 8   | Qwen3.8-27B (low)     | UD-Q8_K_XL | DeepSeek Harness (default plugins) | ↑2.8m ↓95.6k | 37.3%/256k          | [Details](#8-qwen38-27b-low-dsh)    | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-27B-Q8-low-dsh/)  |
 | 9   | Claude Opus 5         | -          | Ultracode                          | -            | -                   | -                                   | ✅            | ✅             | ✅             | ✅            | [Output](/Claude-Opus-5-Ultracode/) |
 | 10  | Qwen3.8-Flash-Next    | UD-IQ4_XS  | pi (no extensions)                 | ↑162k ↓67k   | 36.2%/256k          | [Details](#10-qwen38-flash-next)    | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-flash-next/)      |
-
+| 11  | Claude Opus 5.5       | -          | Claude Code CLI                    | -            | -                   | [Details](#11-claude-opus-55-cli)  | ✅            | ✅             | ✅             | ✅            | [Output](/Claude-Opus-5.5-CLI/)     |
 ## Failed attempts
 
 Some models failed to complete the task (no files produced, blank image, diverting from task, etc.) - listed here separately:
@@ -155,3 +155,12 @@ min-p = 0.0
 ```
 
 Note: The agent produced working code and rendered image after just 17k generated tokens. Then proceeded to validate with vision, fix bugs, "decorate" the scene aesthetically, produce documentation etc. It even noticed that the wall's shading is off and pointed out the rendering bug. Overall very satisfied, beats the 27B model by a big margin in all aspects.
+
+### 11 Claude Opus 5.5 (CLI)
+
+```Total cost:            $0.3231
+Total duration (API):  1m 13s
+Total code changes:    224 lines added, 0 lines removed
+Usage by model:
+    claude-haiku-4-5:  977 input, 16 output, 0 cache read, 0 cache write ($0.0011)
+     claude-opus-5-5:  610 input, 6.8k output, 214.7k cache read, 17.5k cache write ($0.3220)```
