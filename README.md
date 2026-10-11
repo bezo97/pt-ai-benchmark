@@ -9,23 +9,27 @@ Please write a clear and concisely-commented C++ path tracer with support for di
 
 Feel free to open a PR with your results! (For a level playing field, make sure to have a c++ compiler available on the runner, so agents don't need to make up workarounds like producing the image with python...)
 
+Thanks to contributors! bezo for maintenance, lyc for the prompt+evaluation, and everyone who submitted results!
+
 ## Results
 
 Please see outputs to evaluate quality.
 
-| Nr. | Model                 | Quant      | Harness                            | Tokens       | Context utilization | Details                             | Code produced | Binaries built | Image produced | Scene correct | Output                              |
-| --- | --------------------- | ---------- | ---------------------------------- | ------------ | ------------------- | ----------------------------------- | ------------- | -------------- | -------------- | ------------- | ----------------------------------- |
-| 1   | Qwen3.6-27B           | UD-Q8_K_XL | pi (no extensions)                 | ↑15k ↓52k    | 26.1%/256k          | [Details](#1-qwen36-27b)            | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.6-27B-Q8/)          |
-| 2   | Hy3 (295B-A21B)       | IQ1_M      | pi (no extensions)                 | -            | 64k                 | [Details](#2-Hy3)                   | ✅            | ✅             | ✅             | ❌            | [Output](/Hy3/)                     |
-| 3   | Claude Opus 5         | -          | Claude Code CLI                    | -            | -                   | [Details](#3-Claude-Opus-5-CC)      | ✅            | ✅             | ✅             | ✅            | [Output](/Claude-Opus-5-CC/)        |
-| 4   | Laguna S 2.1          | UD-Q4_K_XL | pi (no extensions)                 | ↑7.2k ↓18k   | 9.7%/256k           | [Details](#4-Laguna-S-21)           | ✅            | ❌             | ✅             | ❌            | [Output](/Laguna-S-2.1/)            |
-| 5   | Deepseek 4 Flash 0731 | UD-IQ2_XXS | pi (no extensions)                 | ↑57k ↓56k    | 93.8%/64k           | [Details](#5-Deepseek-4-Flash-0731) | ✅            | ✅             | ✅             | ✅            | [Output](/Deepseek-4-Flash-0731/)   |
-| 6   | Qwen3.8-27B (high)    | UD-Q8_K_XL | pi (no extensions)                 | ↑75k ↓149k   | 63.6%/256k          | [Details](#6-qwen38-27b-high-pi)    | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-27B-Q8/)          |
-| 7   | Qwen3.8-27B (low)     | UD-Q8_K_XL | pi (no extensions)                 | ↑17k ↓47k    | 25.2%/256k          | [Details](#7-qwen38-27b-low-pi)     | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-27B-Q8-low/)      |
-| 8   | Qwen3.8-27B (low)     | UD-Q8_K_XL | DeepSeek Harness (default plugins) | ↑2.8m ↓95.6k | 37.3%/256k          | [Details](#8-qwen38-27b-low-dsh)    | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-27B-Q8-low-dsh/)  |
-| 9   | Claude Opus 5         | -          | Ultracode                          | -            | -                   | -                                   | ✅            | ✅             | ✅             | ✅            | [Output](/Claude-Opus-5-Ultracode/) |
-| 10  | Qwen3.8-Flash-Next    | UD-IQ4_XS  | pi (no extensions)                 | ↑162k ↓67k   | 36.2%/256k          | [Details](#10-qwen38-flash-next)    | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-flash-next/)      |
-| 11  | Claude Opus 5.5       | -          | Claude Code CLI                    | -            | -                   | [Details](#11-claude-opus-55-cli)  | ✅            | ✅             | ✅             | ✅            | [Output](/Claude-Opus-5.5-CLI/)     |
+| Nr. | Model                     | Quant      | Harness                            | Tokens       | Context utilization | Details                               | Code produced | Binaries built | Image produced | Scene correct | Output                              |
+| --- | ------------------------- | ---------- | ---------------------------------- | ------------ | ------------------- | ------------------------------------- | ------------- | -------------- | -------------- | ------------- | ----------------------------------- |
+| 1   | Qwen3.6-27B               | UD-Q8_K_XL | pi (no extensions)                 | ↑15k ↓52k    | 26.1%/256k          | [Details](#1-qwen36-27b)              | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.6-27B-Q8/)          |
+| 2   | Hy3 (295B-A21B)           | IQ1_M      | pi (no extensions)                 | -            | 64k                 | [Details](#2-Hy3)                     | ✅            | ✅             | ✅             | ❌            | [Output](/Hy3/)                     |
+| 3   | Claude Opus 5             | -          | Claude Code CLI                    | -            | -                   | [Details](#3-Claude-Opus-5-CC)        | ✅            | ✅             | ✅             | ✅            | [Output](/Claude-Opus-5-CC/)        |
+| 4   | Laguna S 2.1              | UD-Q4_K_XL | pi (no extensions)                 | ↑7.2k ↓18k   | 9.7%/256k           | [Details](#4-Laguna-S-21)             | ✅            | ❌             | ✅             | ❌            | [Output](/Laguna-S-2.1/)            |
+| 5   | Deepseek 4 Flash 0731     | UD-IQ2_XXS | pi (no extensions)                 | ↑57k ↓56k    | 93.8%/64k           | [Details](#5-Deepseek-4-Flash-0731)   | ✅            | ✅             | ✅             | ✅            | [Output](/Deepseek-4-Flash-0731/)   |
+| 6   | Qwen3.8-27B (high)        | UD-Q8_K_XL | pi (no extensions)                 | ↑75k ↓149k   | 63.6%/256k          | [Details](#6-qwen38-27b-high-pi)      | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-27B-Q8/)          |
+| 7   | Qwen3.8-27B (low)         | UD-Q8_K_XL | pi (no extensions)                 | ↑17k ↓47k    | 25.2%/256k          | [Details](#7-qwen38-27b-low-pi)       | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-27B-Q8-low/)      |
+| 8   | Qwen3.8-27B (low)         | UD-Q8_K_XL | DeepSeek Harness (default plugins) | ↑2.8m ↓95.6k | 37.3%/256k          | [Details](#8-qwen38-27b-low-dsh)      | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-27B-Q8-low-dsh/)  |
+| 9   | Claude Opus 5             | -          | Ultracode                          | -            | -                   | -                                     | ✅            | ✅             | ✅             | ✅            | [Output](/Claude-Opus-5-Ultracode/) |
+| 10  | Qwen3.8-Flash-Next        | UD-IQ4_XS  | pi (no extensions)                 | ↑162k ↓67k   | 36.2%/256k          | [Details](#10-qwen38-flash-next)      | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-flash-next/)      |
+| 11  | Claude Opus 5.5           | -          | Claude Code CLI                    | -            | -                   | [Details](#11-claude-opus-55-cli)     | ✅            | ✅             | ✅             | ✅            | [Output](/Claude-Opus-5.5-CLI/)     |
+| 12  | Qwen3.8-Flash-Next (gufo) | -          | pi (no extensions)                 | ↑20k ↓28k    | 13.3%/262k          | [Details](#12-qwen38-flash-next-gufo) | ✅            | ✅             | ✅             | ✅            | [Output](/qwen3.8-flash-next-gufo/) |
+
 ## Failed attempts
 
 Some models failed to complete the task (no files produced, blank image, diverting from task, etc.) - listed here separately:
@@ -158,9 +162,19 @@ Note: The agent produced working code and rendered image after just 17k generate
 
 ### 11 Claude Opus 5.5 (CLI)
 
-```Total cost:            $0.3231
+```
+Total cost:            $0.3231
 Total duration (API):  1m 13s
 Total code changes:    224 lines added, 0 lines removed
 Usage by model:
     claude-haiku-4-5:  977 input, 16 output, 0 cache read, 0 cache write ($0.0011)
-     claude-opus-5-5:  610 input, 6.8k output, 214.7k cache read, 17.5k cache write ($0.3220)```
+    claude-opus-5-5:   610 input, 6.8k output, 214.7k cache read, 17.5k cache write ($0.3220)
+```
+
+- Thanks to rychveldir for the run.
+
+### 12 Qwen3.8-Flash-Next (gufo)
+
+- We're trying out gufo instead of llama.cpp for inference on strix halo, it's very fast
+- "max" thinking level, but the token usage is suspiciously low, possibly this setting was ignored by gufo?
+- Thanks to lycium for the run
